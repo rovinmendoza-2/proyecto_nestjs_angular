@@ -1,0 +1,16 @@
+version: '3.8' # Utiliza la versión 3.8 o la versión compatible con tu instalación de Docker Compose
+
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: my_db
+      POSTGRES_USER: rovinrivas
+      POSTGRES_PASSWORD: Rivv10rmr
+    ports:
+      - '5432:5432'
+    volumes:
+      - /postgres_data:/var/lib/postgresql/data
+volumes:
+  postgresql-volume:
+    external: true
