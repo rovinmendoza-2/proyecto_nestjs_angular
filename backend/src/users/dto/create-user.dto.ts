@@ -5,7 +5,7 @@ export class CreateUserDto {
   name: string;
   @IsString()
   lastName: string;
-  @IsEmail({}, { message: 'El correo electrónico no es válido' })
+  @IsEmail()
   email: string;
   @MinLength(8)
   password: string;

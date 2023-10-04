@@ -1,18 +1,23 @@
 /* eslint-disable prettier/prettier */
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from '../../common/enums/role.enum';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({nullable: false})
   name: string;
   @Column()
   lastName: string;
-  @Column()
+  @Column({unique: true, nullable: false})
   email: string;
-  @Column()
+  @Column({nullable: false, select: false})
   password: string;
-  @Column()
+  @Column({unique: true})
   number: number;
+  @Column({ type: 'enum', default: Role.ADMIN, enum: Role })
+  role: Role;
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
 }
