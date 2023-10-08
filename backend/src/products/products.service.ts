@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDto } from './dto/create-product.dto';
 import { Category } from 'src/categories/entities/category.entity';
-//import sharp from 'sharp';
 
 @Injectable()
 export class ProductsService {
@@ -13,19 +12,30 @@ export class ProductsService {
         @InjectRepository(Product)
         private productRepository: Repository<Product>,
         @InjectRepository(Category)
-        private readonly categoryRepository: Repository<Category>
+        private readonly categoryRepository: Repository<Category>,
       ) {}
     
       async createProduct(productDto: ProductDto): Promise<Product> {
-        console.log(productDto)
-        const category = await this.validateCategory(productDto.category)
-        const product = await this.productRepository.save({
-          ...productDto,
-          category: category
-        });
-        console.log(product);
-        return product;
-      };
+        console.log(productDto);
+    
+        // Primero, valida y obtén la categoría
+        const category = await this.validateCategory(productDto.category);
+    
+        // Crea una instancia de Producto sin asignar imágenes
+        const product = new Product();
+        product.name = productDto.name;
+        product.description = productDto.description;
+        product.price = productDto.price;
+        product.stock = productDto.stock;
+        product.category = category;
+        product.views = productDto.views;
+    
+        // Guarda el producto en la base de datos
+        const savedProduct = await this.productRepository.save(product);
+    
+        console.log(savedProduct);
+        return savedProduct;
+      }
 
       private async validateCategory(category: string) {
         const categoryEntity = await this.categoryRepository.findOneBy({ name: category });
@@ -41,4 +51,5 @@ export class ProductsService {
         const products = await this.productRepository.find();
         return products;
       }
+
 }

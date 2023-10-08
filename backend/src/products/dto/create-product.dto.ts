@@ -15,9 +15,6 @@ export class ProductDto {
   price: number;
 
   @IsNotEmpty()
-  images: string;
-
-  @IsNotEmpty()
   @IsString()
   category: string;
 
@@ -27,5 +24,5 @@ export class ProductDto {
 
   @IsNotEmpty()
   @IsNumber()
-  views: number;
+  views: number;  
 }
