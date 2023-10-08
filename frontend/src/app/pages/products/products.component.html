@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Imágenes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td><img src="{{ product.filename }}"></td>
+    </tr>
+  </tbody>
+</table>
