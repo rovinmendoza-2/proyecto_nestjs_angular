@@ -3,8 +3,9 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProductDto } from './dto/create-product.dto';
+// import { ProductDto } from './dto/create-product.dto';
 import { Category } from 'src/categories/entities/category.entity';
+import { ProductDto } from './dto/create-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -15,15 +16,17 @@ export class ProductsService {
         private readonly categoryRepository: Repository<Category>,
       ) {}
     
-      async createProduct(productDto: ProductDto): Promise<Product> {
-        console.log(productDto);
-    
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      async createProduct(productDto: ProductDto, file): Promise<Product> {
+        console.log("productDto2", productDto.name);
+        console.log("file2", file.fieldname);
         // Primero, valida y obtén la categoría
         const category = await this.validateCategory(productDto.category);
     
         // Crea una instancia de Producto sin asignar imágenes
         const product = new Product();
         product.name = productDto.name;
+        product.image = ''
         product.description = productDto.description;
         product.price = productDto.price;
         product.stock = productDto.stock;
@@ -32,6 +35,12 @@ export class ProductsService {
     
         // Guarda el producto en la base de datos
         const savedProduct = await this.productRepository.save(product);
+
+        // Genera la URL dinámica utilizando el ID del producto
+        savedProduct.image = `http://localhost:3000/fileupload/${savedProduct.id}`;
+
+        // Actualiza el producto con la URL generada
+        await this.productRepository.save(savedProduct);
     
         console.log(savedProduct);
         return savedProduct;
@@ -51,5 +60,9 @@ export class ProductsService {
         const products = await this.productRepository.find();
         return products;
       }
+
+      async getProductById(id:number): Promise<Product>{
+        return this.productRepository.findOneBy({id});
+    }
 
 }

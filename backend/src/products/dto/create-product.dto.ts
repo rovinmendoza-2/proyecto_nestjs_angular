@@ -7,6 +7,9 @@ export class ProductDto {
   name: string;
 
   @IsNotEmpty()
+  image: string;
+
+  @IsNotEmpty()
   @IsString()
   description: string;
 

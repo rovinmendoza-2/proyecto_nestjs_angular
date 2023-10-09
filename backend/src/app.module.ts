@@ -9,7 +9,7 @@ import { CatsModule } from './cats/cats.module';
 import { BreedsModule } from './breeds/breeds.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
-import { LocalfilesModule } from './localfiles/localfiles.module';
+import { FileuploadModule } from './fileupload/fileupload.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { LocalfilesModule } from './localfiles/localfiles.module';
     BreedsModule,
     ProductsModule,
     CategoriesModule,
-    LocalfilesModule
+    FileuploadModule
   ],
   controllers: [AppController],
   providers: [AppService],
