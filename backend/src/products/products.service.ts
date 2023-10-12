@@ -28,11 +28,11 @@ export class ProductsService {
         }
         // Primero, valida y obtén la categoría
         const category = await this.validateCategory(productDto.category);
-    
+        const urlImagen = `http://localhost:3000/fileupload/${productDto.image}`
         // Crea una instancia de Producto sin asignar imágenes
         const product = new Product();
         product.name = productDto.name;
-        product.image = ''
+        product.image = urlImagen
         product.description = productDto.description;
         product.price = productDto.price;
         product.stock = productDto.stock;
@@ -42,11 +42,11 @@ export class ProductsService {
         // Guarda el producto en la base de datos
         const savedProduct = await this.productRepository.save(product);
 
-        // Genera la URL dinámica utilizando el ID del producto
-        savedProduct.image = `http://localhost:3000/fileupload/${savedProduct.id}`;
+        // // Genera la URL dinámica utilizando el ID del producto
+        // savedProduct.image = `http://localhost:3000/fileupload/${savedProduct.id}`;
 
-        // Actualiza el producto con la URL generada
-        await this.productRepository.save(savedProduct);
+        // // Actualiza el producto con la URL generada
+        // await this.productRepository.save(savedProduct);
     
         console.log(savedProduct);
         return savedProduct;
@@ -62,7 +62,7 @@ export class ProductsService {
         return categoryEntity;
       };
 
-      private validateProduct(productDto: ProductDto) {
+      private async validateProduct(productDto: ProductDto) {
         if (productDto.name === '') {
           throw new BadRequestException('Debe proporcionar un nombre');
         } else if (/^\d+$/.test(productDto.name)) {
@@ -81,6 +81,11 @@ export class ProductsService {
           throw new BadRequestException('El precio debe ser mayor que cero');
         }
       }
+
+    //   private async validateImage(filename: string) {
+    //     const productImage = this.fileRepository.findOneBy({name: filename});
+    //     return productImage
+    // }
 
       async getProducts() {
         const products = await this.productRepository.find();

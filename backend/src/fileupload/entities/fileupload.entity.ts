@@ -18,7 +18,4 @@ export class File {
 
   @Column()
   size: number;
-
-  @Column()
-  productId: number
 }

@@ -6,5 +6,4 @@ export class FileDto {
   filename: string;
   mimetype: string;
   size: number;
-  productId: number;
 }
