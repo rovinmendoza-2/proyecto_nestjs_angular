@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {Body, Controller, Get, Post, UseInterceptors, UploadedFile} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, UseInterceptors} from '@nestjs/common';
 import { ProductsService } from './products.service';
 // import { ProductDto } from './dto/create-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -12,10 +12,9 @@ export class ProductsController {
 
     @Post('create')
     @UseInterceptors(FileInterceptor('file'))
-    async createProduct(@UploadedFile() file, @Body() productDto: ProductDto) {
+    async createProduct(@Body() productDto: ProductDto) {
         console.log("productDto1", productDto);
-        console.log("file1", file);
-        const product = await this.productService.createProduct(productDto, file);
+        const product = await this.productService.createProduct(productDto);
         
         return {product};
     };
@@ -25,6 +24,12 @@ export class ProductsController {
         const products = await this.productService.getProducts();
         console.log(products);
         return products;
+    }
+
+    @Get(':id')
+    async getProductId(@Param('id') id: number) {
+        const product = await this.productService.getProductById(id);
+        return product;
     }
 
 }

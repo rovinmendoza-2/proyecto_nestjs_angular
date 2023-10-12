@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,9 +17,15 @@ export class ProductsService {
       ) {}
     
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      async createProduct(productDto: ProductDto, file): Promise<Product> {
+      async createProduct(productDto: ProductDto): Promise<Product> {
         console.log("productDto2", productDto.name);
-        console.log("file2", file.fieldname);
+
+        this.validateProduct(productDto);
+
+        const productExist = await this.productRepository.findOne({where: {name: productDto.name}})
+        if(productExist) {
+          throw new BadRequestException('El producto con ese nombre ya existe.');
+        }
         // Primero, valida y obtén la categoría
         const category = await this.validateCategory(productDto.category);
     
@@ -56,13 +62,42 @@ export class ProductsService {
         return categoryEntity;
       };
 
+      private validateProduct(productDto: ProductDto) {
+        if (productDto.name === '') {
+          throw new BadRequestException('Debe proporcionar un nombre');
+        } else if (/^\d+$/.test(productDto.name)) {
+          throw new BadRequestException('El nombre no puede ser una cadena de números');
+        }
+      
+        if (productDto.description === '') {
+          throw new BadRequestException('Debe proporcionar una descripción');
+        } else if (/^\d+$/.test(productDto.description)) {
+          throw new BadRequestException('La descripción no puede ser una cadena de números');
+        }
+      
+        if (isNaN(productDto.price)) {
+          throw new BadRequestException('El precio debe ser un número válido');
+        } else if (productDto.price <= 0) {
+          throw new BadRequestException('El precio debe ser mayor que cero');
+        }
+      }
+
       async getProducts() {
         const products = await this.productRepository.find();
         return products;
       }
 
       async getProductById(id:number): Promise<Product>{
-        return this.productRepository.findOneBy({id});
+        const product = await this.productRepository.findOneBy({id});
+        if(!product) {
+          throw new NotFoundException('Producto no encontrado');
+        }
+        // Incrementa el contador de vistas
+        product.views += 1;
+
+        // Guarda el producto actualizado en la base de datos
+        await this.productRepository.save(product);
+        return product
     }
 
 }
