@@ -13,7 +13,7 @@ export class FileuploadService {
         private readonly fileRepository: Repository<File>
     ) { }
 
-    async createFile(file): Promise<FileDto> {
+    async createFile(file: { originalname: string; buffer: Buffer; mimetype: string; size: number; }): Promise<FileDto> {
         await this.validateImgan(file.originalname);
         const image = new File();
         image.data = file.buffer;
@@ -29,6 +29,15 @@ export class FileuploadService {
         return productImage
     }
 
+    async getImages() {
+        const images = await this.fileRepository.find();
+        let nameimg: any = []
+        for(const image of images){
+            nameimg = image.filename;
+        }
+        return nameimg;
+    }
+
     private async validateImgan(filename: string) {
         const existingFile = await this.fileRepository.findOne({
             where: { filename },
@@ -39,7 +48,7 @@ export class FileuploadService {
         }
     }
 
-    async updateFile(id: number, file) {
+    async updateFile(id: number, file: { originalname: string; buffer: Buffer; mimetype: string; size: number; }) {
         const fileUpdate = await this.fileRepository.findOne({ where: { id } });
         if (!fileUpdate) {
             throw new NotFoundException(`File with ID ${id} not found`)

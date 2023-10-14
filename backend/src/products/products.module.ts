@@ -6,10 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriesModule } from '../categories/categories.module';
 import { CategoriesService } from '../categories/categories.service';
 import { Product } from './entities/product.entity';
+import { FileuploadService } from 'src/fileupload/fileupload.service';
+import { FileuploadModule } from 'src/fileupload/fileupload.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product]), CategoriesModule],
-  providers: [ProductsService, CategoriesService],
+  imports: [TypeOrmModule.forFeature([Product]), CategoriesModule, FileuploadModule],
+  providers: [ProductsService, CategoriesService, FileuploadService],
   controllers: [ProductsController],
   exports: [TypeOrmModule],
 })
