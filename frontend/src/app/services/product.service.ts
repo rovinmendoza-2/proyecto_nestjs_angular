@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:3000/products';
+  private apiUrl = 'http://localhost:3000/fileupload/images';
 
   constructor(private http: HttpClient) { }
 
