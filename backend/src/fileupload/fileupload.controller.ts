@@ -38,11 +38,4 @@ export class FileuploadController {
         return {message: 'Se actualio correctamente'}
     }
 
-    @Get()
-    async getImages(){
-        const images = await this.fileuploadService.getImages();
-        console.log(images)
-        return images;
-    }
-
 }

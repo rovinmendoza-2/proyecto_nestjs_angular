@@ -11,7 +11,8 @@ export class UsersController {
 
   @Post('/register')
   async registerUser(@Body() data: CreateUserDto) {
-    return this.userService.createUser(data);
+    const user = this.userService.createUser(data);
+    return { data: user };
   }
 
   @Get()

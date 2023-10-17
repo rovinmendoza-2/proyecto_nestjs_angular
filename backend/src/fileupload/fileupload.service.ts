@@ -29,15 +29,6 @@ export class FileuploadService {
         return productImage
     }
 
-    async getImages() {
-        const images = await this.fileRepository.find();
-        let nameimg: any = []
-        for(const image of images){
-            nameimg = image.filename;
-        }
-        return nameimg;
-    }
-
     private async validateImgan(filename: string) {
         const existingFile = await this.fileRepository.findOne({
             where: { filename },
