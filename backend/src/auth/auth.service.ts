@@ -3,13 +3,14 @@
 import {
   BadRequestException,
   Injectable,
-  UnauthorizedException,
+  UnauthorizedException
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -75,6 +76,14 @@ export class AuthService {
     }
 
   }
+  
+
+  async updateUser(email: string, user: string): Promise<User> {
+    const userUpdate = await this.usersService.updateUserProfileImage(email, user);
+    //console.log('userUpdate', userUpdate)
+    return userUpdate;
+  }
+  
 
   async loginUser({ email, password }: LoginDto) {
     const user = await this.usersService.findByEmailWithPassword(email);

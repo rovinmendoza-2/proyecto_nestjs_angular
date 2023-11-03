@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post, Get, UseGuards } from '@nestjs/common';
-//import { Request } from 'express';
+import { Body, Controller, Post, Get, Put, UseGuards, UseInterceptors, UploadedFile, Request, Param, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -10,6 +9,10 @@ import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 import { AuthGuard } from './guard/auth.guard';
 import { RolesGuard } from './guard/roles.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { join } from 'path';
+//import { v4 as uuidv4 } from 'uuid';
 // interface RequestWithUser extends Request {
 //   user: {
 //     email: string;
@@ -17,6 +20,17 @@ import { RolesGuard } from './guard/roles.guard';
 //   };
 // }
 
+export const storage = {
+  storage: diskStorage({
+    destination: './uploads/profile/',
+    filename: (req, file, cb) => {
+      console.log(file);
+      const filename = file.originalname
+      console.log('filename', filename);
+      cb(null, `${filename}`);
+    }
+  })
+}
 @Controller('api/auth')
 export class AuthController {
   
@@ -32,6 +46,19 @@ export class AuthController {
     return this.authService.loginUser(loginDto);
   }
 
+  @UseGuards(AuthGuard)
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file', storage))
+  async uploadProfile(@UploadedFile() file, @Request() req) {
+    const user = req.user;
+    //console.log('file',file);
+    const profileImage = file.originalname;
+    console.log('profileImage', profileImage)
+    const updatedUser = await this.authService.updateUser(user.email, profileImage);
+    console.log('updatedUser', updatedUser);
+    return { profileImage: updatedUser.profileImage };
+  }
+
   // @Get('profile')
   // @Auth(Role.USER)
   // @UseGuards(AuthGuard, RolesGuard)
@@ -41,6 +68,11 @@ export class AuthController {
   //   return users;
   // }
 
+  @Put(':email')
+    updateUser(@Param('email') email: string, @Body() user: string) {
+        return this.authService.updateUser(String(email), user);
+    }
+
   @Get('profile')
   @Auth(Role.USER)
   @UseGuards(AuthGuard, RolesGuard)
@@ -49,4 +81,11 @@ export class AuthController {
     console.log("users",users)
     return users;
   }
+
+  @Get('profile-image/:imagename')
+  async getImagen(@Param('imagename') imagename, @Res() res){
+    return res.sendFile(join(process.cwd(), 'uploads/profile/'+imagename));
+  }
 }
+
+

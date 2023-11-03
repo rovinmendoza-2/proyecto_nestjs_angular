@@ -11,6 +11,8 @@ export class CreateUserDto {
   password: string;
   @IsNumber()
   number: number;
+  @IsString()
+  profileImage?: string;
 }
 
 export class LoginUserDto {
