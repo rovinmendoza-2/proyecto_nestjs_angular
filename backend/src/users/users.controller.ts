@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, LoginUserDto } from 'src/users/dto/create-user.dto';
-// import { Auth } from 'src/auth/decorators/auth.decorator';
-// import { Role } from 'src/common/enums/role.enum';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
-//@Auth(Role.USER)
+@Auth(Role.USER)
 @Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}

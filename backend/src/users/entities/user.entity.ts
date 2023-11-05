@@ -18,7 +18,7 @@ export class User {
   password: string;
   @Column({unique: true})
   number: number;
-  @Column({ type: 'enum', default: Role.ADMIN, enum: Role })
+  @Column({ type: 'enum', default: Role.USER, enum: Role })
   role: Role;
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
