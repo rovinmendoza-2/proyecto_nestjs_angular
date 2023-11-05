@@ -1,3 +1,73 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #9bc6f52e;
+  padding: 10px 20px;
+  color: white;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-top: -10px;
+}
+
+.logo img {
+  max-width: 100px; /* Ajusta el tamaño de la imagen del logo según tus necesidades */
+}
+
+.menu button {
+  margin-right: 10px;
+  background-color: #fcd4d445;
+  color: black;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .menu {
+    margin-top: 10px;
+  }
+  .menu button {
+    margin: 5px 0;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  width: 250px; /* Ancho del sidebar */
+  background-color: #9bc6f52e; /* Cambia este color de fondo según tus preferencias */
+  height: 100%;
+  padding: 20px;
+  transition: left 0.3s;
+}
+
+.hidden {
+  left: -250px; /* Oculta el sidebar al desplazarlo fuera de la pantalla */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Oculta el sidebar cuando la pantalla es igual o menor a 500px */
+  }
+}
+
 .ui-menubar {
   background-color: #333;
   color: #fff;
@@ -70,7 +140,6 @@ button {
   transform: translate(0px, 0px) rotate(0deg);
   transition: 0.5s;
   box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
-  margin-left: 100px;
 }
 
 button:hover {
@@ -81,4 +150,61 @@ button:hover {
 
 button:active {
   box-shadow: none;
+}
+
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 15px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  margin-top: 10px;
+}
+
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #b1dae7;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+.cta span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #490b0b;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #234567;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: #b1dae7;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.95);
 }

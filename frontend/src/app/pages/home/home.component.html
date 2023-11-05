@@ -1,19 +1,44 @@
-<nav>
-        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="10" class="mr-2" />
-    
+<div class="header">
+  <div class="logo">
+    <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" alt="Logo" />
+  </div>
+  <div class="menu">
         <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Home
+            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Inicio
           </button>
-          <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Products
-          </button>
-          <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Register
+          <button routerLink="/register">
+            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Registrarse
           </button>
           <button>
             <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Login
           </button>
           <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>car
+            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>carrito
           </button>
-</nav>
+  </div>
+</div>
+
+<div class="sidebar">
+    <ul>
+        <li>
+            <button class="cta">
+                <span>Perfil</span>
+            </button>
+        </li>
+        <li>
+            <button class="cta">
+                <span>Productos</span>
+            </button>
+        </li>
+        <li>
+            <button class="cta">
+                <span>Categorias</span>
+            </button>
+        </li>
+        <li>
+            <button class="cta">
+                <span>Nuevos productos</span>
+            </button>
+        </li>
+    </ul>
+</div>
