@@ -24,6 +24,11 @@ export class FileuploadService {
         return image;
     };
 
+    async getFiles() {
+        const files = this.fileRepository.find();
+        return files;
+    }
+
     async getImageByName(filename: string): Promise<File> {
         const productImage = this.fileRepository.findOne({ where: { filename } });
         return productImage

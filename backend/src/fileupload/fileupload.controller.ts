@@ -26,6 +26,12 @@ export class FileuploadController {
         console.log("image", image.filename)
         res.set('Content-Type', image.mimetype);
         res.send(image.data);
+    };
+
+    @Get()
+    async getFiles() {
+        const files = await this.fileuploadService.getFiles();
+        return {file: files};
     }
 
     @Patch(':id')

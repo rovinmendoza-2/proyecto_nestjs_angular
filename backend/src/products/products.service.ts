@@ -27,19 +27,28 @@ export class ProductsService {
         if(productExist) {
           throw new BadRequestException('El producto con ese nombre ya existe.');
         }
+
         // Primero, valida y obtén la categoría
         const category = await this.validateCategory(productDto.category);
 
-        const urlImagen = `http://localhost:3000/fileupload/${productDto.image}`
+        const urlImagen = `http://localhost:3000/fileupload/${productDto.image}`;
         
+        const imageProduct = await this.productRepository.findOne({where: {image: urlImagen}});
+        if(imageProduct){
+          throw new BadRequestException('Esa imagen ya pertenece a otro producto');
+        }
+
         const product = new Product();
         product.name = productDto.name;
+        product.brand = productDto.brand;
+        product.size = productDto.size;
+        product.avaliable = productDto.avaliable;
         product.image = urlImagen
         product.description = productDto.description;
         product.price = productDto.price;
         product.stock = productDto.stock;
         product.category = category;
-        product.views = productDto.views;
+        product.views = 0
     
         // Guarda el producto en la base de datos
         const savedProduct = await this.productRepository.save(product);

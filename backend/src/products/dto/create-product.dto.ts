@@ -8,6 +8,19 @@ export class ProductDto {
   name: string;
 
   @IsNotEmpty()
+  @IsString()
+  brand: string;
+
+  @IsNotEmpty()
+  @IsString()
+  avaliable: string;
+
+  @IsNotEmpty()
+  @IsString()
+  size: string;
+
+  @IsNotEmpty()
+  @IsString()
   image: string;
 
   @IsNotEmpty()

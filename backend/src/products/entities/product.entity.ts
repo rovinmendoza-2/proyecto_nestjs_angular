@@ -7,13 +7,22 @@ export class Product {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({unique: true, nullable: false})
+    @Column({ unique: true, nullable: false })
     name: string;
+
+    @Column({ unique: true, nullable: false })
+    brand: string;
+    
+    @Column({ unique: true, nullable: false })
+    avaliable: string;
+
+    @Column({ unique: true, nullable: false })
+    size: string;
 
     @Column()
     image: string;
-    
-    @Column({unique: true, nullable: false})
+
+    @Column({ unique: true, nullable: false })
     description: string;
 
     @Column()
