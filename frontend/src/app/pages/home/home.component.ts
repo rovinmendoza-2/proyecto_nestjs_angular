@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { UserLogin } from 'src/app/interfaces/user.interface.login';
+import { AuthserviceService } from 'src/app/services/auth/authservice.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,12 @@ import { MenuItem } from 'primeng/api';
 })
 export class HomeComponent implements OnInit {
   items: MenuItem[] | undefined;
+  currentUser: UserLogin | null;
+
+  constructor(private authService:AuthserviceService) {
+    this.currentUser = this.authService.getCurrentUser();
+    console.log('usuario de home', this.currentUser);
+  };
 
   ngOnInit() {
     this.items = [

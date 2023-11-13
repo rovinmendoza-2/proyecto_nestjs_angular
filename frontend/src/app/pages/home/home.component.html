@@ -3,42 +3,99 @@
     <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" alt="Logo" />
   </div>
   <div class="menu">
-        <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Inicio
-          </button>
-          <button routerLink="/register">
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Registrarse
-          </button>
-          <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Login
-          </button>
-          <button>
-            <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>carrito
-          </button>
+    <button>
+      <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Inicio
+    </button>
+    <button routerLink="/register">
+      <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Registrarse
+    </button>
+    <button routerLink="/login">
+      <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>Login
+    </button>
+    <button>
+      <svg viewBox="0 0 24 24" width="5" height="10" stroke="currentColor" stroke-width="2" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"></svg>
+      {{ currentUser!.email || 'Invitado' }}
+    </button>
   </div>
 </div>
 
 <div class="sidebar">
-    <ul>
-        <li>
-            <button class="cta">
-                <span>Perfil</span>
-            </button>
-        </li>
-        <li>
-            <button class="cta">
-                <span>Productos</span>
-            </button>
-        </li>
-        <li>
-            <button class="cta">
-                <span>Categorias</span>
-            </button>
-        </li>
-        <li>
-            <button class="cta">
-                <span>Nuevos productos</span>
-            </button>
-        </li>
-    </ul>
+  <ul>
+    <li>
+      <button class="cta">
+        <span>Perfil</span>
+      </button>
+    </li>
+    <li>
+      <button class="cta">
+        <span>Productos</span>
+      </button>
+    </li>
+    <li>
+      <button class="cta">
+        <span>Categorias</span>
+      </button>
+    </li>
+    <li>
+      <button class="cta">
+        <span>Nuevos productos</span>
+      </button>
+    </li>
+  </ul>
+  <div class="pyramid-loader">
+    <div class="wrapper">
+      <span class="side side1"></span>
+      <span class="side side2"></span>
+      <span class="side side3"></span>
+      <span class="side side4"></span>
+      <span class="shadow"></span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="card">
+    <p class="card-title">Product Name</p>
+    <p class="small-desc">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
+      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
+      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
+      eum nihil itaque!
+    </p>
+    <div class="go-corner">
+      <div class="go-arrow">→</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Product Name</p>
+    <p class="small-desc">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
+      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
+      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
+      eum nihil itaque!
+    </p>
+    <div class="go-corner">
+      <div class="go-arrow">→</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Product Name</p>
+    <p class="small-desc">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
+      veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
+      officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
+      eum nihil itaque!
+    </p>
+    <div class="go-corner">
+      <div class="go-arrow">→</div>
+    </div>
+  </div>
+
 </div>
