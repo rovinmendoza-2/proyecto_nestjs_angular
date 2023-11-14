@@ -9,6 +9,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ImageModule } from 'primeng/image';
 import { FormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,8 @@ import { LoginComponent } from './pages/users/login/login.component';
     CardModule,
     MenubarModule,
     ImageModule,
-    MessagesModule
+    MessagesModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

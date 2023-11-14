@@ -11,6 +11,7 @@ import { AuthserviceService } from 'src/app/services/auth/authservice.service';
 export class HomeComponent implements OnInit {
   items: MenuItem[] | undefined;
   currentUser: UserLogin | null;
+  visible: boolean = false;
 
   constructor(private authService:AuthserviceService) {
     this.currentUser = this.authService.getCurrentUser();
@@ -27,5 +28,7 @@ export class HomeComponent implements OnInit {
     ];
   };
 
-  
+  showDialog() {
+    this.visible = true;
+}
 }
