@@ -17,6 +17,7 @@ import { ProductComponent } from './pages/products/product/product.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/users/register/register.component';
 import { LoginComponent } from './pages/users/login/login.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LoginComponent } from './pages/users/login/login.component';
     MenubarModule,
     ImageModule,
     MessagesModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -61,8 +61,8 @@
 
 
 <div class="main">
-
-  <p-dialog header="Header" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <form [formGroup]="userForm" (ngSubmit)="registerProduct()">
+  <p-dialog header="Header"  [(visible)]="visible" [style]="{ width: '50vw' }">
     <ng-template pTemplate="header">
       <span class="text-xl font-bold">Header Content</span>
     </ng-template>
@@ -71,58 +71,83 @@
 
       <div class="input">
         <label class="input__label">Nombre del producto</label>
-        <input class="input__field" type="text">
-      </div>
-      <div class="input">
-        <label class="input__label">Marca del producto</label>
-        <input class="input__fieldd" type="text">
+        <input class="input__field" type="text" id="name" formControlName="name">
       </div>
 
-      <div class="input">
-        <label class="input__label">Disponibilidad</label>
-        <div class="rad">
-          <label >
-            <input type="radio" name="radio" checked="">
-            <span>HTML</span>
-          </label>
-          <label>
-            <input type="radio" name="radio">
-            <span>CSS</span>
-          </label>
+      <div class="cont2">
+        <div class="input mar">
+          <label class="input__label">Marca del producto</label>
+          <input class="input__fieldd" type="text" id="brand" formControlName="brand">
+        </div>
+  
+        <div class="input">
+          <label class="input__label">Disponibilidad</label>
+          <div class="rad">
+            <label >
+              <input type="radio" name="radio" checked="" name="avaliable" id="avaliable" formControlName="avaliable" value="HTML">
+              <span>HTML</span>
+            </label>
+            <label>
+              <input type="radio" name="radio" id="avaliable" name="avaliable" formControlName="avaliable" value="CSS">
+              <span>CSS</span>
+            </label>
+          </div>
         </div>
       </div>
 
-      <div class="input">
-        <label class="input__label">Talla</label>
-        <input class="input__field" type="text">
+      <div class="cont3">
+        <div class="input">
+          <label class="input__label">Talla</label>
+          <input class="input__field" type="text" id="size" formControlName="size">
+        </div>
+  
+        <div class="input pre">
+          <label class="input__label">Precio</label>
+          <input class="input__field" type="text" id="price" formControlName="price">
+        </div>
       </div>
 
-      <div class="input">
-        <label class="input__label">Precio</label>
-        <input class="input__field" type="text">
+      <div class="cont4">
+        <div class="input">
+          <label class="input__label">Cantidad</label>
+          <input class="input__field" type="text" formControlName="stock">
+        </div>
+  
+        <div class="input cant">
+          <label class="input__label">Categoria</label>
+          <select class="input__field" id="category" formControlName="category">
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option *ngFor="let categoria of category" [value]="categoria.id">{{ categoria.name }}</option>
+          </select>
+        </div>
+        
       </div>
-
-      <div class="input">
-        <label class="input__label">Cantidad</label>
-        <input class="input__field" type="text">
-      </div>
-
-      <div class="input">
-        <label class="input__label">Categoria</label>
-        <input class="input__field" type="text">
-      </div>
+      
+      
+<!-- <div class="flex justify-content-center">
+  <p-fileUpload name="myfile[]" (change)="onFileSelected($event)" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="false" accept="image/*">
+      <ng-template pTemplate="toolbar">
+          <div class="py-3">Upload 1 Files</div>
+      </ng-template>
+  </p-fileUpload>
+</div> -->
+<div class="input">
+  <label class="input__label">Imagen del producto</label>
+  <input class="input__field" type="file" (change)="onFileSelected($event)">
+</div>
 
       <div class="input">
         <label class="input__label">Description</label>
-        <textarea class="input__field input__field--textarea"></textarea>
+        <textarea class="input__field input__field--textarea" id="description" formControlName="description"></textarea>
         <p class="input__description">Give your project a good description so everyone know what's it for</p>
       </div>
 
     </div>
     <div class="modal__footer">
-      <button class="button button--primary">Create project</button>
+      <button class="button button--primary" class="submit">Create project</button>
     </div>
   </p-dialog>
+</form>
 
   <div class="card">
     <p class="card-title">Product Name</p>

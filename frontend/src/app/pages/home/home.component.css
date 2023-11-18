@@ -384,7 +384,7 @@ button:active {
 }
 
 .button {
-  appaerance: none;
+  appearance: none;
   font: inherit;
   border: none;
   background: none;
@@ -496,7 +496,7 @@ button:active {
   border-radius: 0.25rem;
   padding: 0.75rem 0.75rem;
   transition: 0.15s ease;
-  width: 50%;
+  width: 100%;
 }
 .input__fieldd:focus {
   outline: none;
@@ -521,11 +521,54 @@ button:active {
   color: #8d8d8d;
 }
 
+.rad {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+}
 
+.cont2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.cont3 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.cont4 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+.cant {
+  margin-top: -1px !important;
+  margin-left: auto;
+}
+.pre {
+  margin-top: -1px !important;
+  margin-left: auto;
+}
 .rad form {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+}
+
+.mar {
+  margin-top: 1.75rem;
+  margin-right: 31%;
 }
 
 .rad label {
@@ -576,3 +619,5 @@ button:active {
   transition: 0.25s ease;
   box-shadow: inset 0 0 0 0.125em #00005c;
 }
+
+
