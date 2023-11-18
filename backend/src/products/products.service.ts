@@ -6,6 +6,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from 'src/categories/entities/category.entity';
 import { ProductDto } from './dto/create-product.dto';
 import { File } from 'src/fileupload/entities/fileupload.entity';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class ProductsService {
@@ -18,43 +20,47 @@ export class ProductsService {
         private readonly fileRepository: Repository<File>
       ) {}
 
-      async createProduct(productDto: ProductDto): Promise<Product> {
-        console.log("productDto2", productDto.name);
-
+      async createProduct(productDto: ProductDto, imagen: Express.Multer.File): Promise<Product> {
+      
         this.validateProduct(productDto);
-
-        const productExist = await this.productRepository.findOne({where: {name: productDto.name}})
-        if(productExist) {
-          throw new BadRequestException('El producto con ese nombre ya existe.');
-        }
-
-        // Primero, valida y obtén la categoría
-        const category = await this.validateCategory(productDto.category);
-
-        const urlImagen = `http://localhost:3000/fileupload/${productDto.image}`;
         
-        const imageProduct = await this.productRepository.findOne({where: {image: urlImagen}});
-        if(imageProduct){
-          throw new BadRequestException('Esa imagen ya pertenece a otro producto');
-        }
-
+        const productExist = await this.productRepository.findOne({where: {name: productDto.name}})
+          if(productExist) {
+            throw new BadRequestException('El producto con ese nombre ya existe.');
+          }
+        const category = await this.validateCategory(productDto.category);
+  
+        const imageProduct = await this.productRepository.findOne({where: {image: productDto.image}});
+          if(imageProduct){
+            throw new BadRequestException('Esa imagen ya pertenece a otro producto');
+          }
         const product = new Product();
         product.name = productDto.name;
+        product.price = productDto.price;
         product.brand = productDto.brand;
         product.size = productDto.size;
-        product.avaliable = productDto.avaliable;
-        product.image = urlImagen
         product.description = productDto.description;
-        product.price = productDto.price;
-        product.stock = productDto.stock;
+        product.avaliable = productDto.avaliable;
         product.category = category;
-        product.views = 0
+        product.stock = productDto.stock;
+        product.views = productDto.views
     
-        // Guarda el producto en la base de datos
-        const savedProduct = await this.productRepository.save(product);
+        const uploadDirectory = 'uploads';
+  
+        // Crear el directorio si no existe
+        const uploadPath = path.join(__dirname, '..', uploadDirectory);
+        if (!fs.existsSync(uploadPath)) {
+          fs.mkdirSync(uploadPath, { recursive: true });
+        }
+  
+        // Almacenar la ruta de la imagen en el sistema de archivos
+        const imagePath = path.join(uploadPath, imagen.originalname);
+        fs.writeFileSync(imagePath, imagen.buffer);
+  
+        // Almacenar la ruta de la imagen en la base de datos
+        product.image = path.join(uploadDirectory, imagen.originalname);
     
-        console.log(savedProduct);
-        return savedProduct;
+        return this.productRepository.save(product);
       }
 
       private async validateCategory(category: string) {
@@ -143,6 +149,6 @@ export class ProductsService {
         const update = await this.productRepository.save(product);
         return update;
       
-    }
+    };
 
 }

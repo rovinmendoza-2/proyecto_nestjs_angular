@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Category } from "src/categories/entities/category.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Product {
@@ -10,13 +10,13 @@ export class Product {
     @Column({ unique: true, nullable: false })
     name: string;
 
-    @Column({ unique: true, nullable: false })
+    @Column({ nullable: false })
     brand: string;
-    
-    @Column({ unique: true, nullable: false })
+
+    @Column({ nullable: false })
     avaliable: string;
 
-    @Column({ unique: true, nullable: false })
+    @Column({ nullable: false })
     size: string;
 
     @Column()
@@ -25,15 +25,18 @@ export class Product {
     @Column({ unique: true, nullable: false })
     description: string;
 
-    @Column()
+    @Column({ nullable: false})
     price: number;
 
     @ManyToOne(() => Category, (category) => category.id)
     category: Category;
 
-    @Column()
+    @Column({ nullable: false})
     stock: number;
 
     @Column()
     views: number;
+
+    @CreateDateColumn({ type: 'timestamp' })
+    createdAdd: Date;
 }

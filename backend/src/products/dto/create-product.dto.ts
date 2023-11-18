@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsDate } from 'class-validator';
 
 export class ProductDto {
   
@@ -41,5 +41,8 @@ export class ProductDto {
 
   @IsNotEmpty()
   @IsNumber()
-  views: number;  
+  views: number;
+  
+  @IsDate()
+  createdAdd: Date;
 }
