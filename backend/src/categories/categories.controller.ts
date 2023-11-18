@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CategoryDto } from './dto/create-category';
 
@@ -12,5 +12,12 @@ export class CategoriesController {
     async createCategory(@Body() createDto: CategoryDto) {
         const category = await this.categoryService.createCategory(createDto);
         return category;
+    }
+
+    @Get()
+    async getCategories() {
+        const categories = await this.categoryService.getCategories();
+        console.log(categories);
+        return categories;
     }
 }

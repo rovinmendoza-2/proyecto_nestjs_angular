@@ -19,4 +19,9 @@ export class CategoriesService {
         return await this.categoryRepository.save(category);
 
     }
+
+    async getCategories() {
+        const categories = await this.categoryRepository.find();
+        return categories;
+    }
 }
