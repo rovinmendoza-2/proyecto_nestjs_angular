@@ -1,0 +1,28 @@
+.menu {
+  margin-top: 7%;
+  background-color: #bfdbfe00;
+  color: black;
+  border: 1px solid #b1d1f97a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  height: 600px;
+  overflow: auto;
+}
+
+.icon-subtitle {
+  margin-top: 10px;
+  margin-block: 10px;
+  font-size: 1rem;
+  color: #000;
+  text-align: center;
+}
+
+.menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: #779be3;
+}

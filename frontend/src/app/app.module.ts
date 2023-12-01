@@ -17,7 +17,17 @@ import { ProductComponent } from './pages/products/product/product.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/users/register/register.component';
 import { LoginComponent } from './pages/users/login/login.component';
+import { SidebarComponent } from './pages/sidebar/sidebar.component';
+import { HeaderComponent } from './pages/header/header.component';
+
 import { FileUploadModule } from 'primeng/fileupload';
+import { SidebarModule } from 'primeng/sidebar';
+import { ListboxModule } from 'primeng/listbox';
+import { DividerModule } from 'primeng/divider';
+import { SliderModule } from 'primeng/slider';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @NgModule({
   declarations: [
@@ -25,7 +35,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     ProductComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +52,14 @@ import { FileUploadModule } from 'primeng/fileupload';
     ImageModule,
     MessagesModule,
     DialogModule,
-    FileUploadModule
+    FileUploadModule,
+    SidebarModule,
+    ListboxModule,
+    DividerModule,
+    SliderModule,
+    TieredMenuModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   providers: [],
   bootstrap: [AppComponent]

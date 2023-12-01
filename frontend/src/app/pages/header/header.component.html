@@ -1,0 +1,24 @@
+<div class="header">
+    <i class="pi pi-align-justify" (click)="sidebarVisible = true" style="font-size: 1.5rem"></i>
+
+    <i class="pi pi-home" style="font-size: 1.5rem; margin-left: 65%;"></i>
+    <i class="pi pi-user-plus" style="font-size: 1.5rem; margin-left: 5%;"></i>
+    <i class="pi pi-cog" style="font-size: 1.5rem; margin-left: 5%;" (click)="menu.toggle($event)"></i>
+
+    <p-tieredMenu [style]="{'background': '#000000'}" class="menu" #menu [model]="items" [popup]="true">
+        
+    </p-tieredMenu>
+
+    <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png" styleClass="mr-2"
+        shape="circle"></p-avatar>
+</div>
+
+
+<p-sidebar [(visible)]="sidebarVisible">
+    <h3>Sidebar</h3>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+</p-sidebar>
