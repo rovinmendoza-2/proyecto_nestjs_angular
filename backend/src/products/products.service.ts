@@ -21,7 +21,8 @@ export class ProductsService {
       ) {}
 
       async createProduct(productDto: ProductDto, imagen: Express.Multer.File): Promise<Product> {
-      
+        console.log('service', productDto.name);
+        console.log('imagen', imagen)
         this.validateProduct(productDto);
         
         const productExist = await this.productRepository.findOne({where: {name: productDto.name}})
@@ -30,7 +31,7 @@ export class ProductsService {
           }
         const category = await this.validateCategory(productDto.category);
   
-        const imageProduct = await this.productRepository.findOne({where: {image: productDto.image}});
+        const imageProduct = await this.productRepository.findOne({where: {image: `uploads/${ imagen.originalname}`}});
           if(imageProduct){
             throw new BadRequestException('Esa imagen ya pertenece a otro producto');
           }
@@ -43,8 +44,9 @@ export class ProductsService {
         product.avaliable = productDto.avaliable;
         product.category = category;
         product.stock = productDto.stock;
-        product.views = productDto.views
-    
+        product.views = 0;
+        console.log('product', product);
+
         const uploadDirectory = 'uploads';
   
         // Crear el directorio si no existe
@@ -58,10 +60,12 @@ export class ProductsService {
         fs.writeFileSync(imagePath, imagen.buffer);
   
         // Almacenar la ruta de la imagen en la base de datos
-        product.image = path.join(uploadDirectory, imagen.originalname);
-    
+        product.image = imagen.originalname;
+        
         return this.productRepository.save(product);
-      }
+
+      };
+
 
       private async validateCategory(category: string) {
         const categoryEntity = await this.categoryRepository.findOneBy({ name: category });
@@ -101,13 +105,14 @@ export class ProductsService {
       async getProducts() {
         const products = await this.productRepository.find();
         return products;
-      }
+      };
 
       async getProductById(id:number): Promise<Product>{
         const product = await this.productRepository.findOneBy({id});
         if(!product) {
           throw new NotFoundException('Producto no encontrado');
         }
+
         // Incrementa el contador de vistas
         product.views += 1;
 

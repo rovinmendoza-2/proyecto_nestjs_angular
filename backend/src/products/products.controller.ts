@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Param, Patch, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ProductsService } from './products.service';
-// import { ProductDto } from './dto/create-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductDto } from './dto/create-product.dto';
 import * as fs from 'fs';
@@ -15,9 +14,10 @@ export class ProductsController {
 
     @Post('create')
     @UseInterceptors(FileInterceptor('imagen'))
-    async createProduct(@Body() productData: ProductDto, @UploadedFile() imagen: Express.Multer.File,) {
+    async createProduct(@Body() productDto: ProductDto, @UploadedFile() imagen: Express.Multer.File,) {
+        console.log("controller", productDto);
         try {
-            await this.productService.createProduct(productData, imagen);
+            await this.productService.createProduct(productDto, imagen);
             return { message: 'producto creado con exito!' };
         } catch (error) {
             return { message: 'Ocurrio un error', error }
